@@ -40,4 +40,9 @@ class Post extends Model
     {
         return $query->where('user_id', auth()->user()->id);
     }
+
+    public function scopeUsername($query, $username)
+    {
+        return $query->whereRelation('user', 'username', $username);
+    }
 }

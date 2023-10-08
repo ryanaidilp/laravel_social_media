@@ -119,10 +119,10 @@ class FollowController extends Controller
     public function followers(Request $request)
     {
         try {
-            $user = \auth()->user();
-            $followers = QueryBuilder::for(User::class)
+            $user = User::where('username', $request->username)->first() ?? \auth()->user();
+
+            $followers = QueryBuilder::for($user->followers())
                 ->allowedFilters(['username'])
-                ->whereRelation('followables', 'followable_id', '==', $user->id)
                 ->paginate(10)
                 ->appends($request->query());
 
@@ -177,7 +177,7 @@ class FollowController extends Controller
     public function followings(Request $request)
     {
         try {
-            $user = \auth()->user();
+            $user = User::where('username', $request->username)->first() ?? \auth()->user();
             $followings = QueryBuilder::for(User::class)
                 ->allowedFilters(['username'])
                 ->whereRelation('followables', 'user_id', $user->id)

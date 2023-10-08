@@ -3,6 +3,10 @@ extend type Query @guard {
         @paginate(defaultCount: 10, scopes: ["byFollowing"])
         @orderBy(columns: ["created_at"], column: "created_at", direction: DESC)
 
+    userPosts(username: String @scope(name: "username")): [Post!]!
+        @paginate(defaultCount: 10)
+        @orderBy(columns: ["created_at"], column: "created_at", direction: DESC)
+
     myPosts: [Post!]!
         @paginate(defaultCount: 10, scopes: ["myPosts"])
         @orderBy(columns: ["created_at"], column: "created_at", direction: DESC)

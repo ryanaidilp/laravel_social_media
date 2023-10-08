@@ -1,13 +1,5 @@
 extend type Query @guard {
-    user(
-        "Search by primary key."
-        id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
-
-        "Search by email address."
-        email: String
-            @eq
-            @rules(apply: ["prohibits:id", "required_without:id", "email"])
-    ): User @find
+    user("Search by username." username: String @eq): User @find
 
     "List multiple users."
     users(
