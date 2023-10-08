@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(FollowController::class)->group(function () {
+        Route::get('followers', 'followers');
+        Route::get('followings', 'followings');
+        Route::get('users', 'users');
         Route::post('follow', 'follow');
         Route::post('unfollow', 'unfollow');
     });
