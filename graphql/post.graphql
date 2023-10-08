@@ -1,0 +1,17 @@
+extend type Query @guard {
+    posts: [Post!]!
+        @paginate(defaultCount: 10, scopes: ["byFollowing"])
+        @orderBy(columns: ["created_at"], column: "created_at", direction: DESC)
+
+    myPosts: [Post!]!
+        @paginate(defaultCount: 10, scopes: ["myPosts"])
+        @orderBy(columns: ["created_at"], column: "created_at", direction: DESC)
+}
+
+type Post {
+    id: ID!
+    description: String!
+    image: String!
+    created_at: DateTime!
+    user: User @belongsTo
+}

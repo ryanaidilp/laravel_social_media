@@ -1,0 +1,12 @@
+extend type Mutation {
+    login(
+        identifier: String @rules(apply: ["min:4"])
+        password: String! @rules(apply: ["min:8"])
+        device_name: String!
+    ): String
+    logout(id: ID!): Boolean
+}
+
+extend type Query @guard {
+    profile: User! @auth
+}
