@@ -41,7 +41,7 @@ class PostController extends Controller
             return response()->json([
                 'message' => 'Post created successfully!',
                 'success' => false,
-                'data' => $post->refresh(),
+                'data' => $post->refresh()->load('user'),
                 'error' => null,
             ], status: 200);
         } catch (\Throwable $th) {
