@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\FollowController;
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(FollowController::class)->group(function () {
         Route::post('follow', 'follow');
         Route::post('unfollow', 'unfollow');
+    });
+    Route::controller(PostController::class)->prefix('post')->group(function () {
+        Route::post('create', 'create');
     });
 });
